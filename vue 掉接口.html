@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+<style>
+		img{
+			width:100px;
+			height: 100px;
+			float: left;
+		}
+		ul li{
+			width: 115px;
+			height:180px;
+			list-style: none;
+		}
+</style>
+<body>
+	<div id="teach">
+		<ul>
+			<li v-for="item in list">
+				<img :src="item.image">
+				<span>{{ item.name }}</span>
+				<span>{{ item.id }}</span>
+				<span>{{ item.phone }}</span>
+				<span>{{ item.school }}</span>
+			</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+        var vm = new Vue({
+        	el:"#teach",
+        	data:{
+               list:[]
+        	},
+        	mounted:function(){
+        		this.getData();
+        	},
+        	methods : {
+        		getData:function(){
+        			var that=this;
+                    $.ajax({
+                    	url:'http://api.zhituteam.com/api/index',
+                    	type:'get',
+                        datatype:'json',
+                        success:function(res){
+                              console.log(res);
+                              console.log(res.data.teacher);
+                              console.log(111);
+                              that.list=res.data.teacher;
+                              console.log(that.list);
+                        },
+                        error:function(res){
+                              alert(111);   
+                        }
+                    })
+                    console.log(this.list);
+                    console.log(that.list);
+        		}
+        	}
+        })
+	</script>
+</body>
+</html>

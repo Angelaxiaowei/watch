@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+</head>
+<style>
+     .hide{
+     	display: none;
+     }
+</style>
+<body>
+    <div id="app">
+        <input v-model="textValue" type="text" name="">
+        <span @click="clearclick"
+        class="textValueLength">×</span>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data: {
+              textValue:"",
+              textValueLength:false, 
+            },
+            methods:{
+            	clearclick:function(){
+            		this.textValue="";
+            	}
+            },
+            watch: {
+            	textValue:function(){
+                if(this.textValue.length>0){
+                	this.textValueLength=true;
+                }
+                else{this.textValueLength=false;
+                }; 
+                }
+            }        
+        })
+    </script>
+</body>
+</html>
